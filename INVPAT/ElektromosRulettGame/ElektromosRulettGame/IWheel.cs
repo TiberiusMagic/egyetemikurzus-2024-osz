@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace ElektromosRulettGame
 {
-    internal interface IField
+    internal interface IWheel
     {
-        int number { get; set; }
-        string color { get; set; }
-        string ToString();
+        List<IField> Fields { get; }
+        IField Spin();
     }
 }

@@ -6,8 +6,23 @@ using System.Threading.Tasks;
 
 namespace ElektromosRulettGame
 {
-    internal class Field
+    internal class Field: IField
     {
-
+        public int number { get; set; }
+        public string color { get; set; }
+        public Field(int number, string color)
+        {
+            number = number;
+            color = color;
+        }
+        public Field() 
+        {
+            number = 0;
+            color = "Zöld";
+        }
+        public override string ToString()
+        {
+            return $"{color}, {number}";
+        }
     }
 }
