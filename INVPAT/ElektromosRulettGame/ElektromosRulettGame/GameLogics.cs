@@ -65,12 +65,29 @@ namespace ElektromosRulettGame
             if (currentBet != "" && currentBetSize > 0)
             {
                 IField winningField = wheel.Spin();
-                for (int i = 0; i<37; i++)
+                for (int i = 0; i < 37; i++)
                 {
-                    if (currentBet == i.ToString() ) 
+                    if (currentBet == i.ToString())
                     {
-                        
-                    }        
+                        if (currentBet == winningField.number.ToString())
+                        {
+                            money += 36 * currentBetSize;
+                            currentBetSize = 0;
+                            currentBet = "";
+                            Console.WriteLine($"NYERTÉL! Ehhez pedig gratulálok neked kedves barátom. Az új egyenleged: {money}");
+
+                        }
+                        else
+                        {
+                            currentBetSize = 0;
+                            currentBet = "";
+                            Console.WriteLine($"Sajnálom, ezúttal VESZTETTÉL :( Az új egyenleged: {money}");
+                        }
+                    }
+                }
+
+                //TODO: Kiszervezni külön függvénybe a NYERÉS/VESZTÉST, aminek a paramétere, hogy hányszoros szorzó lehet a winre.
+
             }
         }
 
