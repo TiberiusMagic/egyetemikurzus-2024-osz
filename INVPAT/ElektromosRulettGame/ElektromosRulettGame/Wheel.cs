@@ -12,7 +12,7 @@ namespace ElektromosRulettGame
     internal class Wheel: IWheel
     {
         public List<IField> Fields { get; }
-        private Random _random;
+        private readonly Random _random;
 
         public Wheel() 
         { 
