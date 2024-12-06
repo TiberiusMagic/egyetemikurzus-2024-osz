@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ElektromosRulettGame
 {
-    internal class GameLogics: IGameLogics
+    internal class GameLogics : IGameLogics
     {
-        public int money {  get; set; }
+        public int money { get; set; }
         public List<string> bets { get; set; }
         public string currentBet { get; set; }
         public int currentBetSize { get; set; }
@@ -50,17 +50,32 @@ namespace ElektromosRulettGame
             }
         }
 
-        public void CancelBet() 
+        public void CancelBet()
         {
-            if (currentBet != "") 
-            { 
+            if (currentBet != "")
+            {
                 money += currentBetSize;
                 currentBet = "";
                 currentBetSize = 0;
             }
         }
 
-        void ConfirmBetAndStartGame()
+        public void CalculateWin(int multiplier)
+        {
+            money += multiplier * currentBetSize;
+            currentBetSize = 0;
+            currentBet = "";
+            Console.WriteLine($"NYERTÉL! Ehhez pedig gratulálok neked kedves barátom. Az új egyenleged: {money}");
+        }
+
+        public void CalculateLose()
+        {
+            currentBetSize = 0;
+            currentBet = "";
+            Console.WriteLine($"Sajnálom, ezúttal VESZTETTÉL :( Az új egyenleged: {money}");
+        }
+
+        public void ConfirmBetAndStartGame()
         {
             if (currentBet != "" && currentBetSize > 0)
             {
@@ -71,27 +86,25 @@ namespace ElektromosRulettGame
                     {
                         if (currentBet == winningField.number.ToString())
                         {
-                            money += 36 * currentBetSize;
-                            currentBetSize = 0;
-                            currentBet = "";
-                            Console.WriteLine($"NYERTÉL! Ehhez pedig gratulálok neked kedves barátom. Az új egyenleged: {money}");
+                            CalculateWin(36);
 
                         }
                         else
                         {
-                            currentBetSize = 0;
-                            currentBet = "";
-                            Console.WriteLine($"Sajnálom, ezúttal VESZTETTÉL :( Az új egyenleged: {money}");
+                            CalculateLose();
                         }
                     }
                 }
 
-                //TODO: Kiszervezni külön függvénybe a NYERÉS/VESZTÉST, aminek a paramétere, hogy hányszoros szorzó lehet a winre.
+                if(currentBet == "Zöld")
+                {
+
+                }
 
             }
         }
 
-        void TakeOutALoan()
+        public void TakeOutALoan()
         {
             money += 100;
             loanCounter++;

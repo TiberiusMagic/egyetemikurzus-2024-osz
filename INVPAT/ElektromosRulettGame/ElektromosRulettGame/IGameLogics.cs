@@ -17,6 +17,8 @@ namespace ElektromosRulettGame
         bool PlaceBet(int amount, string betType);
         void CancelBet();
         void ConfirmBetAndStartGame();
+        void CalculateWin(int multiplier);
+        void CalculateLose();
         void TakeOutALoan();
     }
 }
