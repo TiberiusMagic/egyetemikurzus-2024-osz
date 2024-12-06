@@ -87,7 +87,6 @@ namespace ElektromosRulettGame
                         if (currentBet == winningField.number.ToString())
                         {
                             CalculateWin(36);
-
                         }
                         else
                         {
@@ -98,9 +97,75 @@ namespace ElektromosRulettGame
 
                 if(currentBet == "Zöld")
                 {
-
+                    if(currentBet == winningField.color)
+                    {
+                        CalculateWin(36);
+                    }
+                    else
+                    {
+                        CalculateLose();
+                    }
                 }
 
+                if(currentBet == "Piros")
+                {
+                    if(currentBet == winningField.color)
+                    {
+                        CalculateWin(2);
+                    }
+                    else
+                    {
+                        CalculateLose();
+                    }
+                }
+
+                if(currentBet == "Fekete")
+                {
+                    if(currentBet == winningField.color)
+                    {
+                        CalculateWin(2);
+                    }
+                    else
+                    {
+                        CalculateLose();
+                    }
+                }
+
+                if(currentBet == "Tucat 1")
+                {
+                    if(winningField.number != 0 && winningField.number <= 12)
+                    {
+                        CalculateWin(3);
+                    }
+                    else
+                    {
+                        CalculateLose();
+                    }
+                }
+
+                if (currentBet == "Tucat 2")
+                {
+                    if (winningField.number > 12 && winningField.number <= 24)
+                    {
+                        CalculateWin(3);
+                    }
+                    else
+                    {
+                        CalculateLose();
+                    }
+                }
+
+                if (currentBet == "Tucat 3")
+                {
+                    if (winningField.number > 24)
+                    {
+                        CalculateWin(3);
+                    }
+                    else
+                    {
+                        CalculateLose();
+                    }
+                }
             }
         }
 
