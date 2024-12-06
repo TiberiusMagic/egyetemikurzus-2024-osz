@@ -14,7 +14,7 @@ namespace ElektromosRulettGame
         public string currentBet { get; set; }
         public int currentBetSize { get; set; }
         public int loanCounter { get; set; }
-        public Wheel wheel { get; }
+        public IWheel wheel { get; }
         public GameLogics()
         {
             money = 100;
@@ -65,14 +65,14 @@ namespace ElektromosRulettGame
             money += multiplier * currentBetSize;
             currentBetSize = 0;
             currentBet = "";
-            Console.WriteLine($"NYERTÉL! Ehhez pedig gratulálok neked kedves barátom. Az új egyenleged: {money}");
+            Console.WriteLine($"NYERTÉL! Ehhez pedig gratulálok neked kedves barátom. Az új egyenleged: {money} kredit");
         }
 
         public void CalculateLose()
         {
             currentBetSize = 0;
             currentBet = "";
-            Console.WriteLine($"Sajnálom, ezúttal VESZTETTÉL :( Az új egyenleged: {money}");
+            Console.WriteLine($"Sajnálom, ezúttal VESZTETTÉL :( Az új egyenleged: {money} kredit");
         }
 
         public void ConfirmBetAndStartGame()
@@ -80,6 +80,7 @@ namespace ElektromosRulettGame
             if (currentBet != "" && currentBetSize > 0)
             {
                 IField winningField = wheel.Spin();
+                Console.WriteLine($"És kipörgött aaaaaaa... {winningField.color}, {winningField.number}");
                 for (int i = 0; i < 37; i++)
                 {
                     if (currentBet == i.ToString())
@@ -176,7 +177,7 @@ namespace ElektromosRulettGame
             if(loanCounter >= 5)
             {
                 money = int.MinValue;
-                Console.WriteLine("Csődbe mentél, a Bank elvitte a házadat, és a feleséged elvált tőled, és vitte a kocsit és a gyerekeket nálad hagyta.");
+                Console.WriteLine("Sajnos elvesztetted az összes kreditedet, KIBUKTÁL AZ EGYETEMRŐL");
             }
         }
     }

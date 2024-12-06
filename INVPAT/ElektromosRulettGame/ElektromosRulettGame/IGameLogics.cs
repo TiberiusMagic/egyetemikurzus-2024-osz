@@ -13,7 +13,7 @@ namespace ElektromosRulettGame
         string currentBet { get; set; }
         int currentBetSize { get; set; }
         int loanCounter { get; set; }
-        IWheel Wheel { get; }
+        IWheel wheel { get; }
         bool PlaceBet(int amount, string betType);
         void CancelBet();
         void ConfirmBetAndStartGame();
