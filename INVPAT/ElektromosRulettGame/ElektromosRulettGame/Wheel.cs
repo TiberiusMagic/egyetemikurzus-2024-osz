@@ -18,8 +18,8 @@ namespace ElektromosRulettGame
         { 
             _random = new Random();
             Fields = new List<IField>();
-            Fields.Add(new Field());
-            Fields.Add(new Field(32, "Piros"));
+            Fields.Add(new Field(0, "Zöld"));
+            Fields.Add(new Field(32, "Piros")); 
             Fields.Add(new Field(15, "Fekete"));
             Fields.Add(new Field(19, "Piros"));
             Fields.Add(new Field(4, "Fekete"));
@@ -59,7 +59,9 @@ namespace ElektromosRulettGame
 
         public IField Spin()
         { 
-            int winningFieldIndex = _random.Next(Fields.Count);
+            int winningFieldIndex = _random.Next(0, Fields.Count);
+            Console.WriteLine($"A winningFieldIndex értéke: {winningFieldIndex}");
+            Console.WriteLine($"A visszatérő mező értéke: {Fields[winningFieldIndex]}");
             return Fields[winningFieldIndex];
         }
     }

@@ -10,6 +10,6 @@ namespace ElektromosRulettGame
     {
         int number { get; set; }
         string color { get; set; }
-        string ToString();
+        //string ToString();
     }
 }

@@ -10,19 +10,19 @@ namespace ElektromosRulettGame
     {
         public int number { get; set; }
         public string color { get; set; }
-        public Field(int number, string color)
+        public Field(int numbert, string colort)
         {
-            number = number;
-            color = color;
+            number = numbert;
+            color = colort;
         }
         public Field() 
         {
             number = 0;
             color = "Zöld";
         }
-        public override string ToString()
+        /*public override string ToString()
         {
             return $"{color}, {number}";
-        }
+        }*/
     }
 }

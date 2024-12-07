@@ -11,7 +11,7 @@ while (!exitGame)
 {
     Console.WriteLine("\nFőmenü:");
     Console.WriteLine("1 - Tét elhelyezése");
-    Console.WriteLine("2 - Játék indítása");
+    Console.WriteLine("2 - Tét véglegesítése és Pörgetés");
     Console.WriteLine("3 - Tét visszavonása");
     Console.WriteLine("4 - Kölcsön felvétele");
     Console.WriteLine("5 - Játék állapota");
@@ -34,7 +34,7 @@ while (!exitGame)
             }
             else
             {
-                Console.WriteLine("Nem tudsz ennyit felrakni. Ellenőrizd a tevékenységedet, és próbáld újra. Ha kell, vehetsz fel hitelt ;)");
+                Console.WriteLine("Nem tudsz ennyit felrakni, vagy nincs ilyen fogadásfajta. Ellenőrizd a tevékenységedet, és próbáld újra. Ha kell, vehetsz fel hitelt ;)");
             }
             break;
 
