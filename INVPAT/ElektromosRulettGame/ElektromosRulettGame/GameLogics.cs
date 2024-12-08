@@ -30,6 +30,10 @@ namespace ElektromosRulettGame
             bets.Add("Tucat 1");
             bets.Add("Tucat 2");
             bets.Add("Tucat 3");
+            bets.Add("Páros");
+            bets.Add("Páratlan");
+            bets.Add("Kicsi");
+            bets.Add("Nagy");
             currentBet = "";
             currentBetSize = 0;
             loanCounter = 0;
@@ -85,100 +89,109 @@ namespace ElektromosRulettGame
                 {
                     if (currentBet == i.ToString())
                     {
-                        if (currentBet == winningField.number.ToString())
-                        {
-                            CalculateWin(36);
-                        }
-                        else
-                        {
-                            CalculateLose();
-                        }
+                        CalculateWinOrLoseForThirtySixers(currentBet == winningField.number.ToString());
                     }
                 }
 
                 if(currentBet == "Zöld")
                 {
-                    if(currentBet == winningField.color)
-                    {
-                        CalculateWin(36);
-                    }
-                    else
-                    {
-                        CalculateLose();
-                    }
+                    CalculateWinOrLoseForThirtySixers(currentBet == winningField.color);
                 }
 
                 if(currentBet == "Piros")
                 {
-                    if(currentBet == winningField.color)
-                    {
-                        CalculateWin(2);
-                    }
-                    else
-                    {
-                        CalculateLose();
-                    }
+                    CalculateWinOrLoseForDoublers(currentBet == winningField.color);
                 }
 
                 if(currentBet == "Fekete")
                 {
-                    if(currentBet == winningField.color)
-                    {
-                        CalculateWin(2);
-                    }
-                    else
-                    {
-                        CalculateLose();
-                    }
+                    CalculateWinOrLoseForDoublers(currentBet == winningField.color);
                 }
 
-                if(currentBet == "Tucat 1")
+                if(currentBet == "Kicsi")
                 {
-                    if(winningField.number != 0 && winningField.number <= 12)
-                    {
-                        CalculateWin(3);
-                    }
-                    else
-                    {
-                        CalculateLose();
-                    }
+                    CalculateWinOrLoseForDoublers(winningField.number > 0 && winningField.number <= 18);
+                }
+
+                if (currentBet == "Nagy")
+                {
+                    CalculateWinOrLoseForDoublers(winningField.number > 18);
+                }
+
+                if (currentBet == "Páros")
+                {
+                    CalculateWinOrLoseForDoublers(winningField.number % 2 == 0);
+                }
+
+                if (currentBet == "Páratlan")
+                {
+                    CalculateWinOrLoseForDoublers(winningField.number % 2 == 1);
+                }
+
+                if (currentBet == "Tucat 1")
+                {
+                    CalculateWinOrLoseForTriplers(winningField.number != 0 && winningField.number <= 12);
                 }
 
                 if (currentBet == "Tucat 2")
                 {
-                    if (winningField.number > 12 && winningField.number <= 24)
-                    {
-                        CalculateWin(3);
-                    }
-                    else
-                    {
-                        CalculateLose();
-                    }
+                    CalculateWinOrLoseForTriplers(winningField.number > 12 && winningField.number <= 24);
                 }
 
                 if (currentBet == "Tucat 3")
                 {
-                    if (winningField.number > 24)
-                    {
-                        CalculateWin(3);
-                    }
-                    else
-                    {
-                        CalculateLose();
-                    }
+                    CalculateWinOrLoseForTriplers(winningField.number > 24);
                 }
+            }
+        }
+
+        public void CalculateWinOrLoseForDoublers(bool condition)
+        {
+            if (condition)
+            {
+                CalculateWin(2);
+            }
+            else
+            {
+                CalculateLose();
+            }
+        }
+
+        public void CalculateWinOrLoseForTriplers(bool condition)
+        {
+            if (condition)
+            {
+                CalculateWin(3);
+            }
+            else
+            {
+                CalculateLose();
+            }
+        }
+
+        public void CalculateWinOrLoseForThirtySixers(bool condition)
+        {
+            if (condition)
+            {
+                CalculateWin(36);
+            }
+            else
+            {
+                CalculateLose();
             }
         }
 
         public void TakeOutALoan()
         {
-            money += 100;
             loanCounter++;
             if(loanCounter >= 5)
             {
-                money = int.MinValue;
+                money = 0;
                 Console.WriteLine("Sajnos elvesztetted az összes kreditedet, KIBUKTÁL AZ EGYETEMRŐL");
+                return;
             }
+            money += 100;
+            Console.WriteLine($"Kölcsön felvéve! Az új egyenleged: {money} kredit");
         }
     }
 }

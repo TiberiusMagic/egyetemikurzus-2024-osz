@@ -60,8 +60,6 @@ namespace ElektromosRulettGame
         public IField Spin()
         { 
             int winningFieldIndex = _random.Next(0, Fields.Count);
-            Console.WriteLine($"A winningFieldIndex értéke: {winningFieldIndex}");
-            Console.WriteLine($"A visszatérő mező értéke: {Fields[winningFieldIndex]}");
             return Fields[winningFieldIndex];
         }
     }

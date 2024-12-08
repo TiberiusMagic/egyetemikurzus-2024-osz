@@ -18,17 +18,63 @@ while (!exitGame)
     Console.WriteLine("0 - Kilépés");
     Console.Write("Válassz egy opciót: ");
 
-    string choice = Console.ReadLine();
+    string? choice = Console.ReadLine();
 
     switch (choice)
     {
         case "1":
-            Console.WriteLine("Mennyi kreditet kockáztatsz?");
-            int risk = Int32.Parse(Console.ReadLine());
-            Console.WriteLine("Elérhető tétek: Számok 0-36, Piros, Fekete, Zöld, Tucat 1, Tucat 2, Tucat 3");
-            Console.Write("Add meg a tét típusát: ");
-            string playerBetType = Console.ReadLine();
-            if (jatek.PlaceBet(risk, playerBetType))
+            int risk = 0;
+            bool validInput = false;
+
+            while (!validInput)
+            {
+                Console.WriteLine("Mennyi kreditet kockáztatsz?");
+                string? input = Console.ReadLine();
+
+                try
+                {
+                    risk = Int32.Parse(input);
+                    if (risk <= 0)
+                    {
+                        Console.WriteLine("A tétnek pozitív számnak kell lennie. Próbáld újra.");
+                    }
+                    else
+                    {
+                        validInput = true;
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Érvénytelen input. Kérlek, adj meg egy egész számot.");
+                }
+                catch (OverflowException)
+                {
+                    Console.WriteLine("A megadott szám túl nagy. (Mármint nem az én szám, az teljesen átlagos méretű a fogorvosom szerint!) Adj meg egy kisebb számot.");
+                }
+            }
+
+            Console.WriteLine("Elérhető tétek: Számok 0-36, Piros, Fekete, Zöld, Kicsi, Nagy, Páros, Páratlan, Tucat 1, Tucat 2, Tucat 3");
+
+            string? playerBetType = "";
+            bool validBetType = false;
+
+            while (!validBetType)
+            {
+                Console.Write("Add meg a tét típusát: ");
+                playerBetType = Console.ReadLine()?.Trim();
+
+                if (string.IsNullOrEmpty(playerBetType))
+                {
+                    Console.WriteLine("Írj be valamit tét típusnak. (Elérhető tétek: Számok 0-36, Piros, Fekete, Zöld, Kicsi, Nagy, Páros, Páratlan, Tucat 1, Tucat 2, Tucat 3)");
+                }
+                else
+                {
+                    validBetType = true;
+                }
+            }
+
+
+            if (jatek.PlaceBet(risk, playerBetType.First().ToString().ToUpper() + String.Join("", playerBetType.Skip(1))))
             {
                 Console.WriteLine($"Sikerült felraknod {risk} kreditet a {playerBetType} fogadásra.");
             }
@@ -49,7 +95,6 @@ while (!exitGame)
 
         case "4":
             jatek.TakeOutALoan();
-            Console.WriteLine($"Kölcsön felvéve! Az új egyenleged: {jatek.money} kredit");
             break;
 
         case "5":
