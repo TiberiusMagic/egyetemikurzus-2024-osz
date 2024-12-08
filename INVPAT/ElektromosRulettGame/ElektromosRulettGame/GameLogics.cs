@@ -41,6 +41,12 @@ namespace ElektromosRulettGame
 
         public bool PlaceBet(int amount, string betType)
         {
+            if (currentBetSize > 0 && !string.IsNullOrEmpty(currentBet))
+            {
+                Console.WriteLine("Már van aktív téted! Először véglegesítsd vagy vond vissza azt, mielőtt új tétet helyezel el.");
+                return false;
+            }
+
             if ((amount > this.money) || (!bets.Contains(betType)) || amount <= 0)
             {
                 return false;
